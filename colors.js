@@ -3,21 +3,29 @@ const nightDay = document.querySelector(".night_day");
 const htmlList = document.querySelector(".html-list");
 const cssList = document.querySelector(".css-list");
 const jsList = document.querySelector(".javascript-list");
-// const htmlList = document.querySelector(".html-list");
-// const cssList = document.querySelector(".css-list");
-// const jsList = document.querySelector(".javascript-list");
 
 htmlList.addEventListener("click", () => {
-  document.querySelector("article").innerHTML = "<h2>HTML</h2>HTML is...";
+  fetch("html")
+    .then((response) => response.text)
+    .then((text) => {
+      document.querySelector("article").innerHTML = text;
+    });
 });
 
 cssList.addEventListener("click", () => {
-  document.querySelector("article").innerHTML = "<h2>CSS</h2>CSS is...";
+  fetch("css")
+    .then((response) => response.text)
+    .then((text) => {
+      document.querySelector("article").innerHTML = text;
+    });
 });
 
 jsList.addEventListener("click", () => {
-  document.querySelector("article").innerHTML =
-    "<h2>JavaScript</h2>JavaScript is...";
+  fetch("javascript")
+    .then((response) => response.text)
+    .then((text) => {
+      document.querySelector("article").innerHTML = text;
+    });
 });
 
 const Links = {
