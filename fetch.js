@@ -1,35 +1,51 @@
 const nightDay = document.querySelector(".night_day");
 
+const indexList = document.querySelector("#index-list");
+
 const htmlList = document.querySelector(".html-list");
 const cssList = document.querySelector(".css-list");
 const jsList = document.querySelector(".javascript-list");
 
-// const article = document.querySelector("article");
+function fetchFunction(name) {
+  fetch(name).then((response) => {
+    response.text().then((text) => {
+      document.querySelector("article").innerHTML = text;
+    })
+  });
+}
+
+fetch("list").then((response) => {
+  response.text().then((text) => {
+    const commaSplit = text.split(",");
+    let blank = "";
+    for (let i = 0; i < commaSplit.length; i++) {
+      const item = commaSplit[i];
+      const listTag = '<li><a href="#!' + item + '" onclick="fetchFunction(\'' + item + '\')">' + item + '</a></li>';
+      blank = blank + listTag;
+    }
+    indexList.innerHTML = blank;
+  })
+
+});
 
 // htmlList.addEventListener("click", () => {
-//   fetch("html")
-//     .then((response) => response.text)
-//     .then((text) => {
-//       document.querySelector("article").innerHTML = "<h2>HTML</h2>HTML is...";
-//     });
+//   fetchFunction("html")
 // });
 
 // cssList.addEventListener("click", () => {
-//   fetch("css")
-//     .then((response) => response.text)
-//     .then((text) => {
-//       console.log(text);
-//       document.querySelector("article").innerHTML = text;
-//     });
+//   fetchFunction("css")
 // });
 
 // jsList.addEventListener("click", () => {
-//   fetch("javascript")
-//     .then((response) => response.text)
-//     .then((text) => {
-//       document.querySelector("article").innerHTML = text;
-//     });
+//   fetchFunction("javascript")
 // });
+
+if (location.hash) {
+  fetchFunction(location.hash.substring(2));
+  //substring: 문자 중 일부를 떼네고 싶을 때 String.prototype.substring()
+} else {
+  fetchFunction("welcome");
+}
 
 const Links = {
   setColor: function (color) {
@@ -87,3 +103,5 @@ function nightDayHandler(self) {
     Links.setColor("blue");
   }
 }
+
+
