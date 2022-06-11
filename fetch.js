@@ -1,7 +1,5 @@
 const nightDay = document.querySelector(".night_day");
-
 const indexList = document.querySelector("#index-list");
-
 const htmlList = document.querySelector(".html-list");
 const cssList = document.querySelector(".css-list");
 const jsList = document.querySelector(".javascript-list");
@@ -20,25 +18,15 @@ fetch("list").then((response) => {
     let blank = "";
     for (let i = 0; i < commaSplit.length; i++) {
       const item = commaSplit[i];
-      const listTag = '<li><a href="#!' + item + '" onclick="fetchFunction(\'' + item + '\')">' + item + '</a></li>';
+      // const listTag = '<li><a href="#!' + item + '" onclick="">' + item + '</a></li>';
+      const listTag = `<li><a href="#!${item}" onclick="fetchFunction('${item}')">${item}</a></li>`
       blank = blank + listTag;
     }
     indexList.innerHTML = blank;
   })
-
 });
 
-// htmlList.addEventListener("click", () => {
-//   fetchFunction("html")
-// });
-
-// cssList.addEventListener("click", () => {
-//   fetchFunction("css")
-// });
-
-// jsList.addEventListener("click", () => {
-//   fetchFunction("javascript")
-// });
+// fetchFunction(\'' + item + '\')
 
 if (location.hash) {
   fetchFunction(location.hash.substring(2));
@@ -49,22 +37,14 @@ if (location.hash) {
 
 const Links = {
   setColor: function (color) {
-    // const alist = document.querySelectorAll('a');
-    // const i = 0;
-    // while(i < alist.length){
-    //   alist[i].style.color = color;
-    //   i = i + 1;
-    // }
     $("a").css("color", color);
   },
 };
 const body = {
   setColor: function (color) {
-    //document.querySelector('body').style.color = color;
     $("body").css("color", color);
   },
   setBackgroundColor: function (color) {
-    // document.querySelector('body').style.backgroundColor = color;
     $("body").css("backgroundColor", color);
   },
 };
@@ -88,7 +68,6 @@ nightDay.addEventListener("click", (event) => {
 });
 
 function nightDayHandler(self) {
-  // const target = document.querySelector("body");
   if (self.value === "night") {
     body.setBackgroundColor("black");
     body.setColor("white");
